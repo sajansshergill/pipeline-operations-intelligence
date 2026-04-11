@@ -9,7 +9,7 @@ The default **`requirements.txt`** installs **only** what the Streamlit app need
 3. Repository: this repo, branch: `main`.
 4. **Main file path:** `src/dashboards/app.py`
 5. **Python version:** Prefer **3.11** (matches `runtime.txt` and `.python-version`). If the builder picks **3.14**, installs should still succeed: **`requirements.txt`** pins **Pillow 12.2** (has `cp314` wheels) and a current **Streamlit** that allows Pillow 11+.
-6. Deploy. Cloud installs **`requirements.txt`** and optional **`packages.txt`** (zlib/jpeg dev headers) automatically.
+6. Deploy. Cloud installs **`requirements.txt`** and optional **`packages.txt`** (Debian package names only, **one per line**—do not use `#` comments; Cloud passes each whitespace-separated token to `apt-get` and will fail on comment words).
 
 Optional: add secrets in the Cloud UI only if you later wire features that need API keys (not required for the bundled demo DB).
 

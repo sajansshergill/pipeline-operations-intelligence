@@ -1,5 +1,3 @@
-# System packages for Streamlit Community Cloud (optional safety net if wheels fail).
-# Pillow wheels normally suffice on Linux; these help any source-build edge case.
 zlib1g-dev
 libjpeg-dev
 libpng-dev
