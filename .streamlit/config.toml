@@ -6,8 +6,10 @@ secondaryBackgroundColor = "#111827"
 textColor = "#e8eeff"
 font = "sans serif"
 
+# Use "auto" so the default header menu stays available locally (e.g. Deploy to Streamlit Cloud).
+# "minimal" hides most of the toolbar and the Cloud deploy shortcut is easy to miss.
 [client]
-toolbarMode = "minimal"
+toolbarMode = "auto"
 
 [browser]
 gatherUsageStats = false
