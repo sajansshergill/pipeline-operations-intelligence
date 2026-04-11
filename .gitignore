@@ -13,8 +13,8 @@ venv/
 .env
 .streamlit/secrets.toml
 
-# Data & outputs (regenerate with scripts)
-data/*.duckdb
+# Data & outputs — other DuckDB files only; repo ships data/vertex_ops.duckdb for clone-and-run
+data/*_local.duckdb
 outputs/
 
 # IDE / OS

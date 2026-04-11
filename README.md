@@ -39,34 +39,41 @@ Configuration-driven architecture where each "client" (enterprise customer on GC
 <img width="1188" height="1502" alt="image" src="https://github.com/user-attachments/assets/6fab34a1-f493-4eb1-9c79-8b0832644e37" />
 
 ## Getting Started
+
 **Prerequisites**
-- Python 3.11+
-- Docker + Docker Compose
-- Anthropic API key (for LLM digest)
+- Python 3.11+ (for dashboard or local agents)
+- Docker + Docker Compose (optional, for Kafka + Spark pipeline)
 
-## Quickstart
-bash# Clone the repo
-git clone https://github.com/sajansshergill/vertex-ops-intelligence.git
-cd vertex-ops-intelligence
+The repo includes **`data/vertex_ops.duckdb`** with demo job telemetry and sample incidents so the **Streamlit app shows charts immediately** after clone (no Kafka required for the UI).
 
-### Start infrastructure (Kafka, Airflow, DuckDB)
-docker-compose up -d
+### Quickstart — dashboard only
 
-### Install dependencies
-pip install -r requirements.txt
-
-### Set environment variables
-export ANTHROPIC_API_KEY=your_key_here
-export TENANT_ID=client_demo
-
-### Start Kafka telemetry producer
-python src/ingestion/producer.py
-
-### Launch dashboard
+```bash
+git clone https://github.com/sajansshergill/pipeline-operations-intelligence.git
+cd pipeline-operations-intelligence
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements-app.txt
 streamlit run src/dashboards/app.py
-Run Tests
-bashpytest tests/ -v
-great_expectations checkpoint run vertex_pipeline_checkpoint
+```
+
+Open http://localhost:8501, choose **Technical** or **Finance**, and use the sidebar tenant selector.
+
+To **refresh or expand** demo data locally:
+
+```bash
+./scripts/prep_ui.sh
+# or: python scripts/seed_demo_data.py
+```
+
+### Full stack (Kafka, producer, consumer, dashboard)
+
+```bash
+docker compose up --build
+```
+
+Uses `requirements.txt` in the app images. See **DEPLOY.md** for Streamlit Cloud, Cloud Run, and other hosting options.
+
+**Anthropic API key** is optional for the dashboard; set `ANTHROPIC_API_KEY` when using LLM digest features.
 
 ## Dashboards
 **Technical View**

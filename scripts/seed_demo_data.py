@@ -154,6 +154,59 @@ def main() -> None:
         total += len(batch)
         print(f"Inserted up to {args.jobs} rows for {tenant_id}")
 
+    # A few OPEN incidents so the Technical view "Open incidents" section is populated.
+    demo_incidents = [
+        (
+            "seed-demo-stale-001",
+            "client_demo",
+            None,
+            "PIPELINE_STALENESS",
+            "HIGH",
+            "Demo incident: review pipeline freshness",
+            "Bundled with seed_demo_data.py for dashboard demos.",
+            None,
+            None,
+            "Run the Kafka producer/consumer stack or re-seed job events.",
+            "OPEN",
+        ),
+        (
+            "seed-demo-budget-002",
+            "client_demo",
+            None,
+            "COST_OVERRUN",
+            "MEDIUM",
+            "Demo incident: weekly spend approaching cap",
+            "Synthetic row for finance/technical views.",
+            2450.0,
+            2500.0,
+            "Validate budget thresholds in config/settings.py.",
+            "OPEN",
+        ),
+        (
+            "seed-demo-acme-003",
+            "client_acme",
+            None,
+            "JOB_FAILURE",
+            "LOW",
+            "Demo incident: isolated training failure",
+            "Synthetic row for multi-tenant demos.",
+            1.0,
+            None,
+            "Check GPU memory for large batch sizes.",
+            "OPEN",
+        ),
+    ]
+    conn.executemany(
+        """
+        INSERT OR IGNORE INTO pipeline_incidents (
+            incident_id, tenant_id, job_id, incident_type, severity,
+            title, description, metric_value, threshold_value,
+            recommended_action, status
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        demo_incidents,
+    )
+
     conn.commit()
     conn.close()
     print(f"Done — {total} insert attempts into {DUCKDB_PATH}")
