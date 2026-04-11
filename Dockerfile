@@ -1,4 +1,5 @@
-FROM python:3.11-slim
+# Bookworm keeps openjdk-17 packages available (newer Debian slim images may not).
+FROM python:3.11-slim-bookworm
 
 # ── System dependencies ────────────────────────────────────────────────────────
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -8,10 +9,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     git \
     netcat-openbsd \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && ARCH="$(dpkg --print-architecture)" \
+    && ln -sfn "/usr/lib/jvm/java-17-openjdk-${ARCH}" /opt/java-17-openjdk
 
-# PySpark needs JAVA_HOME
-ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV JAVA_HOME=/opt/java-17-openjdk
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 # ── Working directory ──────────────────────────────────────────────────────────
