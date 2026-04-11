@@ -1,11 +1,9 @@
-# Vertex Ops Hub — Streamlit dashboard only (Streamlit Community Cloud default file).
-# No Docker, Kafka, Spark, or Airflow required to view the app.
-# Bundled data/vertex_ops.duckdb supplies charts out of the box.
-#
-# Full pipeline: pip install -r requirements-pipeline.txt
+# Streamlit Community Cloud (often Python 3.14 + uv): pin wheels that support cp314.
+# Old stack (Streamlit 1.34 + Pillow 10.4) had no Pillow 3.14 wheel → zlib source-build failure.
 
-streamlit==1.34.0
-duckdb==0.10.3
-pandas==2.2.2
-plotly==5.22.0
+pillow==12.2.0
+streamlit==1.56.0
+duckdb==1.5.1
+pandas==3.0.2
+plotly==5.24.1
 python-dotenv==1.0.1

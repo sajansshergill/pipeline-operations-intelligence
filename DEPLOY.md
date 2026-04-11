@@ -8,8 +8,8 @@ The default **`requirements.txt`** installs **only** what the Streamlit app need
 2. Open [share.streamlit.io](https://share.streamlit.io) → **New app**.
 3. Repository: this repo, branch: `main`.
 4. **Main file path:** `src/dashboards/app.py`
-5. **Python version:** 3.11 (matches `runtime.txt`).
-6. Deploy. Cloud installs **`requirements.txt`** automatically — nothing else to configure.
+5. **Python version:** Prefer **3.11** (matches `runtime.txt` and `.python-version`). If the builder picks **3.14**, installs should still succeed: **`requirements.txt`** pins **Pillow 12.2** (has `cp314` wheels) and a current **Streamlit** that allows Pillow 11+.
+6. Deploy. Cloud installs **`requirements.txt`** and optional **`packages.txt`** (zlib/jpeg dev headers) automatically.
 
 Optional: add secrets in the Cloud UI only if you later wire features that need API keys (not required for the bundled demo DB).
 
