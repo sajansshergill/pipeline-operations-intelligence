@@ -1,0 +1,11 @@
+tenant_id: client_internal
+display_name: Google Internal
+project_id: gcp-ps-internal
+region: us-west1
+budget_threshold_weekly: 15000.00
+alert_email: vertex-ops@google-internal.com
+dashboard_view: technical_primary
+machine_type_preference: a2-highgpu-4g
+gpu_policy: open
+sla_p95_hours: 4.0
+notify_on_overrun: false

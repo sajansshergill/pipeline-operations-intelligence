@@ -14,17 +14,16 @@ Run:
 """
 
 import argparse
-import json
 import logging
 import uuid
-from datetime import datetime, date
+from datetime import date
 
 import duckdb
 from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql import functions as F
 from pyspark.sql.types import (
     StructType, StructField,
-    StringType, IntegerType, DoubleType, BooleanType, TimestampType,
+    StringType, IntegerType, DoubleType, BooleanType,
 )
 
 import sys

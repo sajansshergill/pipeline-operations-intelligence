@@ -16,10 +16,9 @@ Sections:
 
 from __future__ import annotations
 
-from datetime import date, timedelta
+from datetime import date
 from typing import Callable
 
-import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st

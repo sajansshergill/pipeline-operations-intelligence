@@ -37,7 +37,6 @@ from config.settings import (
     DUCKDB_PATH,
     TENANTS,
     DEFAULT_TENANT,
-    LATENCY_SPIKE_MULTIPLIER,
     COST_OVERRUN_PCT,
     GPU_UTILIZATION_FLOOR_PCT,
 )

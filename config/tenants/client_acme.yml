@@ -1,0 +1,11 @@
+tenant_id: client_acme
+display_name: ACME Corp
+project_id: acme-vertex-prod
+region: us-central1
+budget_threshold_weekly: 5000.00
+alert_email: platform-ops@acme.com
+dashboard_view: finance_primary
+machine_type_preference: a2-highgpu-1g
+gpu_policy: open              # GPU jobs unrestricted
+sla_p95_hours: 2.0
+notify_on_overrun: true

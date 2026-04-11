@@ -1,0 +1,11 @@
+tenant_id: client_demo
+display_name: Demo Client
+project_id: demo-vertex-dev
+region: us-east1
+budget_threshold_weekly: 2500.00
+alert_email: dataops@democlient.com
+dashboard_view: technical_primary
+machine_type_preference: n1-standard-8
+gpu_policy: restricted        # GPU jobs require approval
+sla_p95_hours: 3.0
+notify_on_overrun: true

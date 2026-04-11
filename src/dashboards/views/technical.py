@@ -68,7 +68,7 @@ def _int(val: Any) -> int:
 
 
 def render(tenant_id: str, since: date, query_fn: Callable):
-    st.markdown(f"## Pipeline Health — Technical View")
+    st.markdown("## Pipeline Health — Technical View")
     st.caption(f"Tenant: **{tenant_id}** · Since {since}")
 
     since_str = since.isoformat()
