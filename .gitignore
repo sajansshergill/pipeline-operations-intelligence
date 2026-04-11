@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local / secrets
+.env
+.streamlit/secrets.toml
+
+# Data & outputs (regenerate with scripts)
+data/*.duckdb
+outputs/
+
+# IDE / OS
+.cursor/
+.DS_Store
