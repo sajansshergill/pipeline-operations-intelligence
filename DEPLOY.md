@@ -1,33 +1,27 @@
 # Deploying the Vertex Ops Hub
 
-The repo includes a **small demo `data/vertex_ops.duckdb`** so charts work immediately after clone.
+The default **`requirements.txt`** installs **only** what the Streamlit app needs (Streamlit, DuckDB, pandas, plotly, python-dotenv). **No Docker, Kafka, Spark, or Airflow** are required to deploy or view the dashboard. The repo ships **`data/vertex_ops.duckdb`** with demo rows so charts work as soon as the app starts.
 
-## Option A — Streamlit Community Cloud (free tier)
+## Streamlit Community Cloud (recommended, no Docker)
 
-1. Push this repo to GitHub (already done if you are reading this on GitHub).
-2. Go to [share.streamlit.io](https://share.streamlit.io) → **New app**.
-3. Pick the repository and branch, set **Main file path** to: `src/dashboards/app.py`.
-4. Under **Advanced settings** → **Python version**: 3.11.
-5. **Important:** the default `requirements.txt` installs Airflow, Spark, and other heavy packages and **will not finish** on the free tier. Use a slim dependency file instead:
-   - Either temporarily **rename** in a deploy branch: use `requirements-app.txt` as `requirements.txt`, **or**
-   - If your workspace supports a custom requirements path, set it to **`requirements-app.txt`**.
-6. Deploy. Open the app URL; pick **Technical** or **Finance** in the sidebar.
+1. Push this repository to GitHub.
+2. Open [share.streamlit.io](https://share.streamlit.io) → **New app**.
+3. Repository: this repo, branch: `main`.
+4. **Main file path:** `src/dashboards/app.py`
+5. **Python version:** 3.11 (matches `runtime.txt`).
+6. Deploy. Cloud installs **`requirements.txt`** automatically — nothing else to configure.
 
-Secrets: add `ANTHROPIC_API_KEY` in the Cloud **Secrets** UI only if you enable Claude digests elsewhere (not required for the dashboard).
+Optional: add secrets in the Cloud UI only if you later wire features that need API keys (not required for the bundled demo DB).
 
-## Option B — Docker (dashboard only, recommended for production-style hosting)
+## Slim Docker (optional)
 
-Build and run the slim image (same demo DB baked in):
+If you prefer a container but not the full Kafka stack:
 
 ```bash
 docker build -f Dockerfile.streamlit -t vertex-ops-hub:latest .
 docker run --rm -p 8501:8501 vertex-ops-hub:latest
 ```
 
-Open `http://localhost:8501`.
+## Full pipeline (Kafka + Spark + producer + consumer)
 
-Deploy the same image to **Google Cloud Run**, **Fly.io**, **Railway**, or **Render**: set the container port to **8501**, allocate ~512MB–1GB RAM.
-
-## Option C — Full stack (Kafka + producer + consumer + dashboard)
-
-Use the main `Dockerfile` and `docker compose up --build` from the repository root (see README). That path uses `requirements.txt` and is intended for local / VM demos, not Streamlit Cloud.
+For local or VM demos with live telemetry, install **`requirements-pipeline.txt`** and use **`docker compose`** with the main **`Dockerfile`** (see README). That path is separate from Streamlit Cloud and is not used by the hosted dashboard-only deploy.

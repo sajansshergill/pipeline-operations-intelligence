@@ -20,9 +20,9 @@ ENV PATH="${JAVA_HOME}/bin:${PATH}"
 WORKDIR /app
 
 # ── Python dependencies ────────────────────────────────────────────────────────
-COPY requirements.txt .
+COPY requirements-pipeline.txt .
 RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+    && pip install --no-cache-dir -r requirements-pipeline.txt
 
 # ── Copy source ────────────────────────────────────────────────────────────────
 COPY . .

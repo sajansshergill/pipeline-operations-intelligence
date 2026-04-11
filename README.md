@@ -52,7 +52,7 @@ The repo includes **`data/vertex_ops.duckdb`** with demo job telemetry and sampl
 git clone https://github.com/sajansshergill/pipeline-operations-intelligence.git
 cd pipeline-operations-intelligence
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements-app.txt
+pip install -r requirements.txt
 streamlit run src/dashboards/app.py
 ```
 
@@ -68,10 +68,11 @@ To **refresh or expand** demo data locally:
 ### Full stack (Kafka, producer, consumer, dashboard)
 
 ```bash
+pip install -r requirements-pipeline.txt   # on host if running Python services outside Docker
 docker compose up --build
 ```
 
-Uses `requirements.txt` in the app images. See **DEPLOY.md** for Streamlit Cloud, Cloud Run, and other hosting options.
+Compose images install **`requirements-pipeline.txt`**. See **DEPLOY.md** for Streamlit Cloud (uses lightweight **`requirements.txt`** only).
 
 **Anthropic API key** is optional for the dashboard; set `ANTHROPIC_API_KEY` when using LLM digest features.
 
